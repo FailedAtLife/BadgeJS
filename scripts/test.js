@@ -7,7 +7,8 @@ const fs = require('fs');
 start = new Date();
 let badge = Badge.from({
     label: '<label_text>',
-    text: '<value_text>'
+    text: '<value_text>',
+    color: Badge.color('<color>')
 });
 console.log('Created Badge object in', new Date() - start, 'ms');
 
