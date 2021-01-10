@@ -4,5 +4,6 @@
     <rect display="inline-block" height="20" width="{{textWidth}}" fill="#4c1" x="{{labelWidth}}"/>
     <g font-family="Verdana" height="20" width="{{fullWidth}}" font-size="12">
         <text x="6" y="14" fill="#fff">{{label}}</text>
+        <text x="{{textX}}" y="14" fill="#fff">{{text}}</text>
     </g>
 </svg>
