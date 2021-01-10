@@ -9,7 +9,7 @@
     </linearGradient>
 
     <g clip-path="url(#clip)">
-        <rect display="inline-block" height="20" width="{{labelWidth}}" fill="#555"/>
+        <rect display="inline-block" height="20" width="{{labelWidth}}" fill="#5f5f5f"/>
         <rect display="inline-block" height="20" width="{{textWidth}}" fill="{{color}}" x="{{labelWidth}}"/>
         <rect height="20" width="{{fullWidth}}" fill="url(#grad)"/>
     </g>
