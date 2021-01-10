@@ -10,7 +10,7 @@
 
     <g clip-path="url(#clip)">
         <rect display="inline-block" height="20" width="{{labelWidth}}" fill="#555"/>
-        <rect display="inline-block" height="20" width="{{textWidth}}" fill="#4c1" x="{{labelWidth}}"/>
+        <rect display="inline-block" height="20" width="{{textWidth}}" fill="{{color}}" x="{{labelWidth}}"/>
         <rect height="20" width="{{fullWidth}}" fill="url(#grad)"/>
     </g>
     <g font-family="Verdana" height="20" width="{{fullWidth}}" font-size="12">
