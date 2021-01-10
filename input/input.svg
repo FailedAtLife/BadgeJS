@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" height="20" width="{{fullWidth}}">
+    <title>{{title}}</title>
+    <rect display="inline-block" height="20" width="{{labelWidth}}" fill="#555"/>
+    <rect display="inline-block" height="20" width="{{textWidth}}" fill="#4c1" x="{{labelWidth}}"/>
+    <g font-family="Verdana" height="20" width="{{fullWidth}}" font-size="12">
+        <text x="6" y="14" fill="#fff">{{label}}</text>
+    </g>
+</svg>
