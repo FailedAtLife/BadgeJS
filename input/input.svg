@@ -3,6 +3,10 @@
     <rect display="inline-block" height="20" width="{{labelWidth}}" fill="#555"/>
     <rect display="inline-block" height="20" width="{{textWidth}}" fill="#4c1" x="{{labelWidth}}"/>
     <g font-family="Verdana" height="20" width="{{fullWidth}}" font-size="12">
+        <!-- Shading -->
+        <text x="6" y="15" fill="#01010132">{{label}}</text>
+        <text x="{{textX}}" y="15" fill="#01010132">{{text}}</text>
+        <!-- Normal -->
         <text x="6" y="14" fill="#fff">{{label}}</text>
         <text x="{{textX}}" y="14" fill="#fff">{{text}}</text>
     </g>
