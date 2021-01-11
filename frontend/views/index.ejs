@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BadgeJS</title>
+        <link rel="stylesheet" href="/static/css/master.css">
+    </head>
+    <body>
+        <div class="center">
+            <h1 class="title">BadgeJS</h1>
+            <p>
+                A lightweight badge-generator
+            </p>
+        </div>
+        
+        <a class="h3" href="#builtin">Builtin</a>
+        <section id="builtin">
+            <p>Colors:</p>
+            <img src="/badge/color/red/red" alt="Red" title="Red"> <br/>
+            <img src="/badge/color/orange/orange" alt="Orange" title="Orange"> <br/>
+            <img src="/badge/color/yellow/yellow" alt="Yellow" title="Yellow"> <br/>
+            <img src="badge/color/blue/blue" alt="Blue" title="Blue"> <br/>
+            <img src="/badge/color/cyan/cyan" alt="Cyan" title="Cyan"> <br/>
+            <img src="/badge/color/green/green" alt="Green" title="Green"> <br/>
+            <img src="/badge/color/pink/pink" alt="Pink" title="Pink"> <br/>
+            <img src="/badge/color/grey/grey" alt="Grey" title="Grey"> <br/>
+            <img src="/badge/color/darkgrey/darkgrey" alt="Darkrey" title="Darkgrey"> <br/>
+        </section>
+
+        <a class="h3" href="#static">Static Badges</a>
+        <section id="static">
+            <p>
+                <code>GET /badge/:label/:text/[:color]</code>
+            </p>
+            <p>
+                Parameters:
+            </p>
+            <ul>
+                <li>label (required): the badge label name</li>
+                <li>text (required): the badge message</li>
+                <li>color (optional): the badge message color. Defaults to grey</li>
+            </ul>
+        </section>
+
+        <a class="h3" href="#github">GitHub</a>
+        <section id="github">
+            <p>
+                <div class="descriptions">
+                    GitHub issue count <img src="/badge/issues/3 open/blue"> <br/>
+                    GitHub pull request count <img src="/badge/issues/6 open/blue">
+                </div>
+                <div class="endpoints">
+                    <a href="/github/issues/:user/:repo">GET /github/issues/:user/:repo</a> <br/>
+                    <a href="/github/pulls/:user/:repo">GET /github/pulls/:user/:repo</a>
+                </div>
+            </p>
+        </section>
+    </body>
+</html>
