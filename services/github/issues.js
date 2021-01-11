@@ -8,11 +8,16 @@ module.exports = {
 
         console.log(`https://api.github.com/repos/${user}/${repo}/issues`);
 
-        let issues = await axios.get(`https://api.github.com/repos/${user}/${repo}/issues`, {
-            headers: {
-                Accept: 'application/vnd.github.v3+json'
-            }
-        });
+        let issues;
+        try {
+            issues = await axios.get(`https://api.github.com/repos/${user}/${repo}/issues`, {
+                headers: {
+                    Accept: 'application/vnd.github.v3+json'
+                }
+            });
+        } catch (e) {
+            return;
+        }
 
         let open = 0, closed = 0;
 
