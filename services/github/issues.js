@@ -6,8 +6,6 @@ module.exports = {
         let user = args[0];
         let repo = args[1];
 
-        console.log(`https://api.github.com/repos/${user}/${repo}/issues`);
-
         let issues;
         try {
             issues = await axios.get(`https://api.github.com/repos/${user}/${repo}/issues`, {
