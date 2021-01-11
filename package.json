@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/robincunningham2/BadgeJS#readme",
   "dependencies": {
+    "express": "^4.17.1",
     "fs": "0.0.1-security",
     "html-entities": "^2.0.2",
     "string-pixel-width": "^1.10.0"
