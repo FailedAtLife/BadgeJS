@@ -21,16 +21,15 @@ module.exports = {
             };
         }
 
-        let open = 0, closed = 0;
+        let open = 0;
 
         issues.data.forEach(issue => {
             if (issue.open) open++;
-            else closed++;
         });
 
         return {
             label: 'issues',
-            text: `${open} open, ${closed} closed`,
+            text: `${open} open`,
             color: 'blue'
         };
     }
