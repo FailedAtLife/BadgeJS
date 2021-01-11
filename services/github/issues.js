@@ -14,7 +14,11 @@ module.exports = {
                 }
             });
         } catch (e) {
-            return;
+            return {
+                label: 'issues',
+                text: 'not found',
+                color: 'yellow'
+            };
         }
 
         let open = 0, closed = 0;
