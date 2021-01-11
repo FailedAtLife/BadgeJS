@@ -4,7 +4,8 @@
   "description": "A JavaScript library for creating (status) badges.",
   "main": "lib/main.js",
   "scripts": {
-    "test": "node scripts/test"
+    "test": "node scripts/test",
+    "web": "node lib/web"
   },
   "repository": {
     "type": "git",
