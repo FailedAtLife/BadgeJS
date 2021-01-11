@@ -19,6 +19,7 @@
   "homepage": "https://github.com/robincunningham2/BadgeJS#readme",
   "dependencies": {
     "axios": "^0.21.1",
+    "ejs": "^3.1.5",
     "express": "^4.17.1",
     "fs": "0.0.1-security",
     "html-entities": "^2.0.2",
