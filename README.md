@@ -1,7 +1,7 @@
 # BadgeJS
 > A JavaScript library for creating (status) badges.
 
-[![BadgeJS](https://badgejs.herokuapp.com/badge/badge/js/orange)](https://badgejs.herokuapp.com)
+[![BadgeJS](_readme/badge.svg)](https://badgejs.herokuapp.com)
 
 ```js
 const Badge = require('badgejs');
