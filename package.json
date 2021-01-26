@@ -2,7 +2,7 @@
   "name": "badgejs",
   "version": "1.0.1",
   "description": "A JavaScript library for creating (status) badges.",
-  "main": "lib/main.js",
+  "main": "index.js",
   "scripts": {
     "test": "node scripts/test",
     "web": "node lib/web"
