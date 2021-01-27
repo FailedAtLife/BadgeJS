@@ -1,5 +1,5 @@
 /**
- * @module Web
+ * @module Server
  * @author Robin Cunningham
  * @version 1.0.0
  */
@@ -15,11 +15,17 @@ const production = process.env.ENVIROMENT
 if (production) {
     app.use((req, res, next) => {
         if (req.headers['x-forwarded-proto'] != 'https') {
-            return res.redirect(['https://', req.get('Host'), req.url].join(''));
+            return res.redirect([
+                'https://',
+                req.get('Host'),
+                req.url
+            ].join(''));
         } else next();
     });
 }
 
-app.listen(port, () => {
-    console.log('App running on port', port);
-});
+module.exports = function start() {
+    app.listen(port, () => {
+        console.log('App running on port', port);
+    });
+}
