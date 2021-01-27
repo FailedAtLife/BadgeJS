@@ -8,24 +8,51 @@
 
 const app = require('express')();
 
-const production = process.env.ENVIROMENT
-    || 'development' == 'production',
-    port = process.env.PORT || 3000
+let opt;
+module.exports = {
+    /**
+     * Sets multiple options for the server
+     *
+     * @method init
+     * @param {object} options Init options
+     * @returns {true}
+     * @private
+     */
+    init: function(options) {
+        if (options.production == undefined
+            || options.port == undefined)
+            throw new Error('Missing parameters');
 
-if (production) {
-    app.use((req, res, next) => {
-        if (req.headers['x-forwarded-proto'] != 'https') {
-            return res.redirect([
-                'https://',
-                req.get('Host'),
-                req.url
-            ].join(''));
-        } else next();
-    });
-}
+        opt = options;
 
-module.exports = function start() {
-    app.listen(port, () => {
-        console.log('App running on port', port);
-    });
-}
+        if (opt.logger) app.use(opt.logger);
+
+        if (opt.production) {
+            app.use((req, res, next) => {
+                if (req.headers['x-forwarded-proto'] != 'https') {
+                    return res.redirect([
+                        'https://',
+                        req.get('Host'),
+                        req.url
+                    ].join(''));
+                } else next();
+            });
+        }
+
+        return true;
+    },
+
+    /**
+     * Starts the server
+     *
+     * @method start
+     * @returns {true}
+     * @private
+     */
+    start: function() {
+        if (opt.onstart) app.listen(opt.port, opt.onstart);
+        else app.listen(port);
+
+        return true;
+    }
+};
