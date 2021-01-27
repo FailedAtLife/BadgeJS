@@ -70,6 +70,13 @@ function date() {
  * @public
  */
 function logger(req, res, next) {
+    if (req.url == '/favicon.ico') {
+        next();
+        return true;
+    }
+
+    req.url = decodeURI(req.url);
+
     let addr = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     if (addr.substring(0, 7) == '::ffff:')
         addr = addr.substring(7);
