@@ -9,6 +9,9 @@ trim_trailing_whitespace = true
 [{*.md,*.js}]
 trim_trailing_whitespace = false
 
+[*.html]
+insert_final_newline = false
+
 [*.svg]
 insert_final_newline = false
 indent_style = space
