@@ -6,7 +6,8 @@
 
 'use strict';
 
-const app = require('express')();
+const express = require('express');
+const app = express();
 
 let opt;
 module.exports = {
@@ -25,7 +26,11 @@ module.exports = {
 
         opt = options;
 
-        if (opt.logger) app.use(opt.logger);
+        app.set('view engine', 'ejs');
+        app.set('views', 'frontend');
+        app.use('/static', express.static('frontend/static'));
+
+        if (opt.logger && !opt.production) app.use(opt.logger);
 
         if (opt.production) {
             app.use((req, res, next) => {
@@ -38,6 +43,10 @@ module.exports = {
                 } else next();
             });
         }
+
+        app.get('/', (req, res) => {
+            res.render('index');
+        });
 
         return true;
     },
