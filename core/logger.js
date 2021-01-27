@@ -17,7 +17,7 @@
  */
 function pad(string) {
     string = String(string);
-    return string.length < 2 ? '0' + string : string
+    return string.length < 2 ? '0' + string : string;
 }
 
 /**
