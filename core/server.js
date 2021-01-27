@@ -28,7 +28,7 @@ module.exports = {
         opt = options;
 
         app.set('view engine', 'ejs');
-        app.set('views', 'frontend');
+        app.set('views', 'frontend/pages');
         app.use('/static', express.static('frontend/static'));
 
         if (opt.logger && !opt.production) app.use(opt.logger);
