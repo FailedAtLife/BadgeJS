@@ -16,7 +16,7 @@ module.exports = {
      * @method init
      * @param {object} options Init options
      * @returns {true}
-     * @private
+     * @public
      */
     init: function(options) {
         if (options.production == undefined
@@ -47,7 +47,7 @@ module.exports = {
      *
      * @method start
      * @returns {true}
-     * @private
+     * @public
      */
     start: function() {
         if (opt.onstart) app.listen(opt.port, opt.onstart);

@@ -10,13 +10,15 @@
  * Get's called for every request to the server
  *
  * @method logger
- * @param {*} req express request object
- * @param {*} res express response object
- * @param {*} next express next method
+ * @param {*} req Express request object
+ * @param {*} res Express response object
+ * @param {*} next Express next method
  * @returns {true}
- * @private
+ * @public
  */
-module.exports = function logger(req, res, next) {
+function logger(req, res, next) {
     next();
     return true;
 }
+
+module.exports = logger;
