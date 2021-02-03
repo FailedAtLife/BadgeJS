@@ -44,7 +44,7 @@ mod.callback = async function(args, badge) {
     let open = 0;
 
     issues.forEach(issue => {
-        if (issue.open || issues.state == 'open') open++;
+        if (issue.open || issue.state == 'open') open++;
     });
 
     badge.label = 'issues';
