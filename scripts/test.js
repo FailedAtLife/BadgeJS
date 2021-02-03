@@ -1,5 +1,5 @@
 let start = new Date();
-const Badge = require('../lib/main');
+const Badge = require('../index');
 console.log('Imported BadgeJS module in', new Date() - start, 'ms');
 
 start = new Date();

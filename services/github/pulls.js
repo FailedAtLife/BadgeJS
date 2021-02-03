@@ -1,30 +1,50 @@
+/**
+ * @module github/pulls
+ * @author Robin Cunningham
+ * @version 1.0.0
+ */
+
+'use strict';
+
 const axios = require('axios');
 
-module.exports = {
-    args: 2,
-    main: async (args) => {
-        let user = args[0];
-        let repo = args[1];
+const mod = {};
+mod.async = true;
+mod.name = 'github/pulls';
+mod.args = 2;
 
-        let pulls;
-        try {
-            pulls = await axios.get(`https://api.github.com/repos/${user}/${repo}/pulls`, {
-                headers: {
-                    Accept: 'application/vnd.github.v3+json'
-                }
-            });
-        } catch (e) {
-            return {
-                label: 'pulls',
-                text: 'not found',
-                color: 'yellow'
-            };
-        }
+/**
+ * Fetches public GitHub pull requests from GitHub api
+ * 
+ * @method callback
+ * @param {array<string>} args URL arguments
+ * @param {BadgeJS} badge
+ * @public
+ */
+mod.callback = async function(args, badge) {
+    const user = args[0];
+    const repo = args[1];
 
-        return {
-            label: 'pulls',
-            text: `${pulls.data.length} open`,
-            color: 'blue'
-        };
+    let pulls;
+    try {
+        let res = await axios.get(`https://api.github.com/repos/${user}/${repo}/pulls`, {
+            headers: {
+                Accept: 'application/vnd.github.v3+json'
+            }
+        });
+
+        pulls = res.data;
+    } catch (e) {
+        badge.label = 'pulls';
+        badge.text = 'not found';
+        badge.color = 'yellow';
+        return badge;
     }
+
+    badge.label = 'pulls';
+    badge.text = `${pulls.length} open`;
+    badge.color = 'blue';
+    return badge;
 }
+
+module.exports = mod;
