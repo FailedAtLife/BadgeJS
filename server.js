@@ -3,17 +3,19 @@
 const Server = require('./core/server');
 const logger = require('./core/logger');
 
-let opt = {};
+let options = {};
 
-opt.production = process.env.ENVIROMENT
+options.production = process.env.ENVIROMENT
     || 'development' == 'production';
 
-opt.port = process.env.PORT || 3000;
-opt.logger = logger;
+options.port = process.env.PORT || 3000;
+options.logger = logger;
 
-opt.onstart = function() {
-    console.log('Server running on port', opt.port);
+options.onstart = function() {
+    console.log('Server running on port', options.port);
 };
 
-Server.init(opt);
-Server.start();
+const server = new Server;
+
+server.init(options);
+server.start();
