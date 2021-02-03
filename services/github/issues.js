@@ -1,36 +1,56 @@
+/**
+ * @module github/issues
+ * @author Robin Cunningham
+ * @version 1.0.0
+ */
+
+'use strict';
+
 const axios = require('axios');
 
-module.exports = {
-    args: 2,
-    main: async (args) => {
-        let user = args[0];
-        let repo = args[1];
+const mod = {};
+mod.async = true;
+mod.name = 'github/issues';
+mod.args = 2;
 
-        let issues;
-        try {
-            issues = await axios.get(`https://api.github.com/repos/${user}/${repo}/issues`, {
-                headers: {
-                    Accept: 'application/vnd.github.v3+json'
-                }
-            });
-        } catch (e) {
-            return {
-                label: 'issues',
-                text: 'not found',
-                color: 'yellow'
-            };
-        }
+/**
+ * Fetches public GitHub issues from GitHub api
+ * 
+ * @method callback
+ * @param {array<string>} args URL arguments
+ * @param {BadgeJS} badge
+ * @public
+ */
+mod.callback = async function(args, badge) {
+    const user = args[0];
+    const repo = args[1];
 
-        let open = 0;
-
-        issues.data.forEach(issue => {
-            if (issue.open) open++;
+    let issues;
+    try {
+        let res = await axios.get(`https://api.github.com/repos/${user}/${repo}/issues`, {
+            headers: {
+                Accept: 'application/vnd.github.v3+json'
+            }
         });
 
-        return {
-            label: 'issues',
-            text: `${open} open`,
-            color: 'blue'
-        };
+        issues = res.data;
+    } catch (e) {
+        badge.label = 'issues';
+        badge.text = 'not found';
+        badge.color = 'yellow';
+        return badge;
     }
+
+    let open = 0;
+
+    issues.forEach(issue => {
+        if (issue.open) open++;
+    });
+
+    badge.label = 'issues';
+    badge.text = `${open} open`;
+    badge.color = 'blue';
+    return badge;
 }
+
+module.exports = mod;
