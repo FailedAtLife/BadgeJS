@@ -78,6 +78,49 @@ Server.prototype.init = function(options) {
         res.send(badge.toString('svg'));
     });
 
+    this.app.get('/:service/:sub/*', (req, res) => {
+        let mod;
+        try {
+            mod = require(`../services/${req.params.service}/${req.params.sub}`);
+        } catch {
+            let badge = Badge.from({
+                label: `${req.params.service}/${req.params.sub}`,
+                text: 'not found',
+                color: Badge.color('orange')
+            });
+
+            res.setHeader('Content-Type', 'image/svg+xml');
+            return res.send(badge.toString('svg'));
+        }
+
+        let args = req.params[0].split('/');
+        if (args.length < 2) {
+            let badge = Badge.from({
+                label: `${req.params.service}/${req.params.sub}`,
+                text: 'missing args',
+                color: Badge.color('orange')
+            });
+
+            res.setHeader('Content-Type', 'image/svg+xml');
+            return res.send(badge.toString('svg'));
+        }
+
+        if (mod.async) {
+            mod.callback(args, {}).then(badge => {
+                badge.color = Badge.color(badge.color);
+                badge = Badge.from(badge);
+                res.setHeader('Content-Type', 'image/svg+xml');
+                return res.send(badge.toString('svg'));
+            });
+        } else {
+            let badge = mod.callback(args, {});
+            badge.color = Badge.color(badge.color);
+            badge = Badge.from(badge);
+            res.setHeader('Content-Type', 'image/svg+xml');
+            return res.send(badge.toString('svg'));
+        }
+    });
+
     return true;
 }
 
