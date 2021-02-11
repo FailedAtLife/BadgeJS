@@ -94,7 +94,7 @@ Server.prototype.init = function(options) {
         }
 
         let args = req.params[0].split('/');
-        if (args.length < 2) {
+        if (args.length < mod.args) {
             let badge = Badge.from({
                 label: `${req.params.service}/${req.params.sub}`,
                 text: 'missing args',
