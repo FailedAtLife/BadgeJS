@@ -29,5 +29,5 @@ pkgLock.version = version;
 
 console.log(`Bumping to '${version}'`);
 
-fs.writeFileSync('package.json', JSON.stringify(pkg, null, 2));
-fs.writeFileSync('package-lock.json', JSON.stringify(pkgLock, null, 2));
+fs.writeFileSync('package.json', JSON.stringify(pkg, null, 2) + '\n');
+fs.writeFileSync('package-lock.json', JSON.stringify(pkgLock, null, 2) + '\n');
