@@ -77,8 +77,10 @@ Server.prototype.init = function(options) {
         res.setHeader('Content-Type', 'image/svg+xml');
 
         let overwrite = {};
-        if (Buffer.from(req.query.color, 'hex').length)
-            req.query.color = '#' + req.query.color;
+        try {
+            if (Buffer.from(req.query.color, 'hex').length)
+                req.query.color = '#' + req.query.color;
+        } catch {}
 
         try {
             if (req.query.label) overwrite.label = req.query.label;
