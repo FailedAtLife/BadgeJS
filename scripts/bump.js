@@ -10,17 +10,9 @@ let version = pkg.version.split('.');
 let bumping = process.argv[2] || 'patch';
 
 if (bumping.indexOf('.') != -1) version = bumping.split('.');
-else {
-    switch (bumping) {
-        default:
-        case 'patch':
-            version[2]++;
-        case 'minor':
-            version[1]++;
-        case 'major':
-            version[0]++;
-    }
-}
+else if (bumping == 'major') version[0]++;
+else if (bumping == 'minor') version[1]++;
+else version[2]++;
 
 version = version.join('.');
 
