@@ -79,46 +79,33 @@ Server.prototype.init = function(options) {
     });
 
     this.app.get('/:service/:sub/*', (req, res) => {
-        let mod;
-        try {
-            mod = require(`../services/${req.params.service}/${req.params.sub}`);
-        } catch {
-            let badge = Badge.from({
-                label: `${req.params.service}/${req.params.sub}`,
-                text: 'not found',
-                color: Badge.color('orange')
-            });
+        res.setHeader('Content-Type', 'image/svg+xml');
 
-            res.setHeader('Content-Type', 'image/svg+xml');
-            return res.send(badge.toString('svg'));
-        }
+        let overwrite = {};
+        if (Buffer.from(req.query.color, 'hex').length)
+            req.query.color = '#' + req.query.color;
+
+        try {
+            if (req.query.label) overwrite.label = req.query.label;
+            if (req.query.color) overwrite.color = Badge.color(req.query.color);
+        } catch {}
 
         let args = req.params[0].split('/');
-        if (args.length < mod.args) {
-            let badge = Badge.from({
-                label: `${req.params.service}/${req.params.sub}`,
-                text: 'missing args',
-                color: Badge.color('orange')
-            });
+        let options = {
+            service: req.params.service,
+            sub: req.params.sub,
+            overwrite
+        };
 
-            res.setHeader('Content-Type', 'image/svg+xml');
-            return res.send(badge.toString('svg'));
-        }
+        let service = new Badge.Service(options);
 
-        if (mod.async) {
-            mod.callback(args, {}).then(badge => {
-                badge.color = Badge.color(badge.color);
-                badge = Badge.from(badge);
-                res.setHeader('Content-Type', 'image/svg+xml');
-                return res.send(badge.toString('svg'));
-            });
-        } else {
-            let badge = mod.callback(args, {});
-            badge.color = Badge.color(badge.color);
-            badge = Badge.from(badge);
-            res.setHeader('Content-Type', 'image/svg+xml');
-            return res.send(badge.toString('svg'));
-        }
+        let badge;
+        service.generate(args).then(b => badge = b)
+            .catch(() => b = Badge.from({
+                label: `${options.service}/${options.sub}`,
+                text: 'error',
+                color: 'red'
+            })).finally(() => res.send(badge.toString('svg')));
     });
 
     return true;
