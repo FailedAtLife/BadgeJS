@@ -1,0 +1,13 @@
+# Git / GitHub files
+.github
+.gitignore
+
+# Server files
+core/
+frontend/
+Procfile
+CNAME
+server.js
+
+# Npm scripts
+scripts/
