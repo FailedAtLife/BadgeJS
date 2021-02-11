@@ -1,3 +1,6 @@
+
+'use strict';
+
 let start = new Date();
 const Badge = require('../index');
 console.log('Imported BadgeJS module in', new Date() - start, 'ms');
