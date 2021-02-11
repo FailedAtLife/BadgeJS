@@ -15,3 +15,9 @@ let badge = Badge.from({
 
 badge.toFile('badge.svg');
 ```
+
+## Installation
+
+```bash
+npm install badgejs
+```
