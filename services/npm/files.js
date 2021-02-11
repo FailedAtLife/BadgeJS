@@ -5,11 +5,11 @@ const axios = require('axios');
 
 const mod = {};
 mod.async = true;
-mod.name = 'github/pulls';
-mod.args = 2;
+mod.name = 'npm/files';
+mod.args = 1;
 
 /**
- * Fetches public GitHub pull requests from GitHub api
+ * Fetches file count from npm package
  * 
  * @method callback
  * @param {array<string>} args URL arguments
@@ -18,28 +18,27 @@ mod.args = 2;
  * @public
  */
 mod.callback = async function(args, badge) {
-    const user = args[0];
-    const repo = args[1];
+    const pkg = args[0];
 
-    let pulls;
+    let files;
     try {
-        let res = await axios.get(`https://api.github.com/repos/${user}/${repo}/pulls`, {
+        let res = await axios.get(`https://registry.npmjs.org/${pkg}`, {
             headers: {
-                Accept: 'application/vnd.github.v3+json'
+                Accept: 'application/vnd.npm.install-v1+json'
             }
         });
 
-        pulls = res.data;
+        files = res.data.versions[res.data['dist-tags'].latest].dist.fileCount;
     } catch (e) {
-        badge.label = 'pulls';
+        badge.label = 'files';
         badge.text = 'not found';
         badge.color = 'yellow';
         return badge;
     }
 
-    badge.label = 'pulls';
-    badge.text = `${pulls.length} open`;
-    badge.color = 'blue';
+    badge.label = 'files';
+    badge.text = files.toString();
+    badge.color = 'green';
     return badge;
 }
 

@@ -5,11 +5,11 @@ const axios = require('axios');
 
 const mod = {};
 mod.async = true;
-mod.name = 'github/pulls';
-mod.args = 2;
+mod.name = 'npm/downloads';
+mod.args = 1;
 
 /**
- * Fetches public GitHub pull requests from GitHub api
+ * Fetches weekly downloads from npm package
  * 
  * @method callback
  * @param {array<string>} args URL arguments
@@ -18,27 +18,26 @@ mod.args = 2;
  * @public
  */
 mod.callback = async function(args, badge) {
-    const user = args[0];
-    const repo = args[1];
+    const pkg = args[0];
 
-    let pulls;
+    let downloads;
     try {
-        let res = await axios.get(`https://api.github.com/repos/${user}/${repo}/pulls`, {
+        let res = await axios.get(`https://api.npmjs.org/downloads/point/last-week/${pkg}`, {
             headers: {
-                Accept: 'application/vnd.github.v3+json'
+                Accept: 'application/vnd.npm.install-v1+json'
             }
         });
 
-        pulls = res.data;
+        downloads = res.data.downloads;
     } catch (e) {
-        badge.label = 'pulls';
+        badge.label = 'downloads';
         badge.text = 'not found';
         badge.color = 'yellow';
         return badge;
     }
 
-    badge.label = 'pulls';
-    badge.text = `${pulls.length} open`;
+    badge.label = 'downloads';
+    badge.text = `${downloads}/week`;
     badge.color = 'blue';
     return badge;
 }

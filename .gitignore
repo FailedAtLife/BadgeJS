@@ -1,6 +1,11 @@
+# Project
+.idea/
+
 # System files
 .DS_Store
 
-# Project files
-node_modules/**
+# Dependencies
+node_modules/
+
+# Output test files
 out*.svg

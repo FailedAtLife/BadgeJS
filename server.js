@@ -1,3 +1,4 @@
+
 'use strict';
 
 const Server = require('./core/server');

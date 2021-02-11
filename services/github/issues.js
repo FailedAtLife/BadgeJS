@@ -1,8 +1,3 @@
-/**
- * @module github/issues
- * @author Robin Cunningham
- * @version 1.0.0
- */
 
 'use strict';
 
@@ -18,7 +13,8 @@ mod.args = 2;
  * 
  * @method callback
  * @param {array<string>} args URL arguments
- * @param {BadgeJS} badge
+ * @param {BadgeJS} badge Input badge
+ * @returns {object} Badge options
  * @public
  */
 mod.callback = async function(args, badge) {
