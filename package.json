@@ -11,6 +11,11 @@
     "type": "git",
     "url": "git+https://github.com/robincunningham2/BadgeJS.git"
   },
+  "keywords": [
+    "badges",
+    "badge-generator",
+    "badgejs"
+  ],
   "author": "Robin Cunningham",
   "license": "MIT",
   "bugs": {
